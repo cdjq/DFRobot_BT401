@@ -33,7 +33,7 @@ public:
     eUDisk,          //U盘模式
     eTFCard,         //TF卡模式
     eIdle = 8            //空闲模式
-  }eOperatingMode_t;
+  }eFunction_t;
   
   //播放模式
   typedef enum{
@@ -71,9 +71,9 @@ public:
   //设置音量
   bool setVOl(uint8_t vol);
   //设置工作模式
-  bool peratingMode(eOperatingMode_t mode);
+  bool switchFunction(eFunction_t function);
   //播放模式
-  bool playMode(ePlayMode_t mode);
+  bool setPlayMode(ePlayMode_t mode);
   //播放控制  仅对TF卡和U盘播放有效  AA
   bool playControl(ePlayControl_t cmd);
   //下一曲
@@ -81,9 +81,9 @@ public:
   //上一曲
   bool last();
   //指定设备的第N个文件进行播放  指定序号播放
-  bool assignNumPlay(uint16_t number);
+  bool playSpecFile(uint16_t number);
   //指定路径播放
-  bool assignPathPlay(const char* path);
+  bool playSpecFile(const char* path);
   //删除当前播放的文件
   bool delCurFile();
   //呼叫电话号码

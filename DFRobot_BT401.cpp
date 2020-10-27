@@ -47,10 +47,10 @@ bool DFRobot_BT401::setVOl(uint8_t vol)
 }
 
 //设置工作模式
-bool DFRobot_BT401::peratingMode(eOperatingMode_t mode)
+bool DFRobot_BT401::switchFunction(eFunction_t function)
 {
   char data[1];
-  itoa(mode, data, 10);
+  itoa(function, data, 10);
   sendCMD("CM0", data);
   if(readAck() == "OK\r\n"){
     return true;
@@ -60,7 +60,7 @@ bool DFRobot_BT401::peratingMode(eOperatingMode_t mode)
 }
 
 //播放模式
-bool DFRobot_BT401::playMode(ePlayMode_t mode)
+bool DFRobot_BT401::setPlayMode(ePlayMode_t mode)
 {
   char data[1];
   itoa(mode, data, 10);
@@ -108,7 +108,7 @@ bool DFRobot_BT401::last()
 }
 
 //指定设备的第N个文件进行播放
-bool DFRobot_BT401::assignNumPlay(uint16_t number)
+bool DFRobot_BT401::playSpecFile(uint16_t number)
 {
   char data[5];
   itoa(number, data, 10);
@@ -121,7 +121,7 @@ bool DFRobot_BT401::assignNumPlay(uint16_t number)
 }
 
 //指定文件夹循环播放
-bool DFRobot_BT401::assignPathPlay(const char* path)
+bool DFRobot_BT401::playSpecFile(const char* path)
 {
   sendCMD("AF", path);
   if(readAck() == "OK\r\n"){
