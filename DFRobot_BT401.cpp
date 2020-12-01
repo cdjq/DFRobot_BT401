@@ -165,14 +165,14 @@ bool DFRobot_BT401::controltalk(eControltalk_t cmd)
     return false;
   }
 }
-eBtStatus DFRobot_BT401::getBtStatus(){
+DFRobot_BT401::eBtStatus DFRobot_BT401::getBtStatus(){
 
   sendCMD("TS", NULL);
   String status = readAck();
   if(status == "TS+00\r\n"){
     return eStandby;
   }else if(status == "TS+01\r\n"){
-    return eIdle;
+    return eBTIdle;
   }else if(status == "TS+02\r\n"){
     return ePlaying;
   }else if(status == "TS+03\r\n"){

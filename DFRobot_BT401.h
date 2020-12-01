@@ -67,7 +67,7 @@ public:
   //蓝牙状态
   typedef enum{
    eStandby,
-   eIdle,
+   eBTIdle,
    ePlaying,
    eCalling,
    eOnphone,

@@ -1,3 +1,4 @@
+
 #include <DFRobot_BT401.h>
 #include <SoftwareSerial.h>
 
@@ -14,19 +15,26 @@ void setup(){
     delay(1000);
   }
   bt.setVOl(30);
-  bt.switchFunction(bt.eBluetooth);
-
+  bt.switchFunction(bt.eTFCard);
+  bt.setPlayMode(bt.eDeviceCycle);
 }
 
 void loop(){
   //播放
-    if(bt.getBtStatus() == bt.eCalling){
-      Serial.println(bt.getTelNumber());
-      delay(50);
-      bt.controltalk(bt.eAnswer);
-    }
-    if(bt.getBtStatus() == bt.eOnphone){
-      delay(2000);
-      while(true);
-    }
+  bt.playControl(bt.ePlay);
+  delay(3000);
+  //暂停
+  bt.playControl(bt.ePause);
+  delay(3000);
+  //下一曲
+  bt.next();
+  delay(3000);
+  //上一曲
+  bt.last();
+  delay(3000);
+  //播放第一个文件
+  bt.playSpecFile(1);
+  while(1);
+  /*删除正在播放的文件*/
+  //bt.delCurFile();
 }
