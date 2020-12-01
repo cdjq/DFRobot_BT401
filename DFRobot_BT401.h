@@ -64,7 +64,15 @@ public:
     eHangUp,          //挂断电话
     eAnswer        //接听电话
   }eControltalk_t;
-  
+  //蓝牙状态
+  typedef enum{
+   eStandby,
+   eIdle,
+   ePlaying,
+   eCalling,
+   eOnphone,
+   eError,
+  }eBtStatus;
 public:
   DFRobot_BT401();
   bool begin(Stream &s);
@@ -92,8 +100,10 @@ public:
   bool controltalk(eControltalk_t cmd);
   //复位
   bool reset();
-  
-
+  //得到蓝牙状态
+  eBtStatus getBtStatus();
+  //获取通话号码
+  String  getTelNumber();
 protected:
  /**
   * @brief Send data 

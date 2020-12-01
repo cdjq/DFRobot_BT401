@@ -165,7 +165,36 @@ bool DFRobot_BT401::controltalk(eControltalk_t cmd)
     return false;
   }
 }
+eBtStatus DFRobot_BT401::getBtStatus(){
 
+  sendCMD("TS", NULL);
+  String status = readAck();
+  if(status == "TS+00\r\n"){
+    return eStandby;
+  }else if(status == "TS+01\r\n"){
+    return eIdle;
+  }else if(status == "TS+02\r\n"){
+    return ePlaying;
+  }else if(status == "TS+03\r\n"){
+    return eCalling;
+  }else if(status == "TS+04\r\n"){
+    return eOnphone;
+  }
+  
+   return eError;
+}
+String DFRobot_BT401::getTelNumber(){
+
+  sendCMD("TT", NULL);
+  String phone="";
+  String data = readAck();
+  for(uint8_t i = 0;i < data.length()-3;i++){
+      phone += data[3+i];
+  }
+  
+  return phone;
+
+}
 //复位
 bool DFRobot_BT401::reset()
 {
@@ -206,20 +235,36 @@ void DFRobot_BT401::sendCMD(const char *cmd)
 
 String DFRobot_BT401::readAck(uint8_t len)
 {
-  String str="                           ";
+  String str="                             ";
   size_t offset = 0,left = len;
   long long curr = millis();
-  while(left) {
-    if(_s->available()) {
-       str[offset]= _s->read();
-      left--;
-      offset++;
-    }
-    if(millis() - curr > 2000) {
-      break;
-    }
+  if(len = 0){
+    while(1) {
+      if(_s->available()) {
+        str[offset]= _s->read();
+        left--;
+        offset++;
+      }
+      if(str[offset - 1] == '\n' && str[offset - 2] == '\r') break;
+      if(millis() - curr > 1000) {
+        return "error";
+        break;
+      }
+	}
+  } else {
+    while(left) {
+      if(_s->available()) {
+         str[offset]= _s->read();
+        left--;
+        offset++;
+      }
+      if(millis() - curr > 1000) {
+        return "error";
+        break;
+      }
   }
-   str[len]=0;
+  }
+  str[len]=0;
   return str;
 }
 
