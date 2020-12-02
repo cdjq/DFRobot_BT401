@@ -168,7 +168,7 @@ bool DFRobot_BT401::controltalk(eControltalk_t cmd)
 DFRobot_BT401::eBtStatus DFRobot_BT401::getBtStatus(){
 
   sendCMD("TS", NULL);
-  String status = readAck();
+  String status = readAck(0);
   if(status == "TS+00\r\n"){
     return eStandby;
   }else if(status == "TS+01\r\n"){
@@ -187,7 +187,7 @@ String DFRobot_BT401::getTelNumber(){
 
   sendCMD("TT", NULL);
   String phone="";
-  String data = readAck();
+  String data = readAck(0);
   for(uint8_t i = 0;i < data.length()-3;i++){
       phone += data[3+i];
   }
