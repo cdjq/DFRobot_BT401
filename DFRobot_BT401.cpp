@@ -238,7 +238,7 @@ String DFRobot_BT401::readAck(uint8_t len)
   String str="                             ";
   size_t offset = 0,left = len;
   long long curr = millis();
-  if(len = 0){
+  if(len == 0){
     while(1) {
       if(_s->available()) {
         str[offset]= _s->read();
