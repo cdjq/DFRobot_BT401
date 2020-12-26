@@ -23,6 +23,12 @@
 #include <Wire.h>
 #include <stdint.h>
 #include <SoftwareSerial.h>
+//#define ENABLE_DBG
+#ifdef ENABLE_DBG
+#define DBG(...) {Serial.print("[");Serial.print(__FUNCTION__); Serial.print("(): "); Serial.print(__LINE__); Serial.print(" ] "); Serial.println(__VA_ARGS__);}
+#else
+#define DBG(...)
+#endif
 
 class DFRobot_BT401{
 public:

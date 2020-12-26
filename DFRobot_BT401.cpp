@@ -33,15 +33,20 @@ bool DFRobot_BT401::begin(Stream &s){
 bool DFRobot_BT401::setVOl(uint8_t vol)
 {
   char data[2];
+    DBG("\r\n");
   itoa(vol, data, 10);
+    DBG("\r\n");
   if(vol > 9){
     sendCMD("CA", data);
   } else{
     sendCMD("CA0", data);
   }
+    DBG("\r\n");
   if(readAck() == "OK\r\n"){
+    DBG("true\r\n");
     return true;
   } else{
+    DBG("false\r\n");
     return false;
   }
 }
@@ -51,7 +56,7 @@ bool DFRobot_BT401::switchFunction(eFunction_t function)
 {
   char data[1];
   itoa(function, data, 10);
-  sendCMD("CM0", data);
+  sendCMD("CM0", "1");
   if(readAck() == "OK\r\n"){
     return true;
   } else{
@@ -168,7 +173,7 @@ bool DFRobot_BT401::controltalk(eControltalk_t cmd)
 DFRobot_BT401::eBtStatus DFRobot_BT401::getBtStatus(){
 
   sendCMD("TS", NULL);
-  String status = readAck(0);
+  String status = readAck(7);
   if(status == "TS+00\r\n"){
     return eStandby;
   }else if(status == "TS+01\r\n"){
@@ -184,7 +189,7 @@ DFRobot_BT401::eBtStatus DFRobot_BT401::getBtStatus(){
    return eError;
 }
 String DFRobot_BT401::getTelNumber(){
-
+  delay(50);
   sendCMD("TT", NULL);
   String phone="";
   String data = readAck(0);
@@ -208,16 +213,30 @@ bool DFRobot_BT401::reset()
 
 void DFRobot_BT401::sendCMD(const char *cmd, const char *payload)
 {
-  String data;
-  data = "AT+";
+  String data = "";
+    DBG("\r\n");
+  data += "AT+";
+    DBG("\r\n");
   data += cmd;
-  data +=payload;
+    DBG("\r\n");
+  if(payload != NULL)
+     data +=payload;
   data += "\r\n";
+    DBG("\r\n");
   uint8_t length = data.length();
+    DBG("\r\n");
   uint8_t at[20];
+  
+    DBG("\r\n");
+   while(_s->available()) {
+    DBG("\r\n");
+	    _s->read();
+	 }
+    DBG(data);
   for(uint8_t i=0;i<length;i++)
     at[i] = data[i];
   _s->write(at,length);
+   data="";
 }
 
 void DFRobot_BT401::sendCMD(const char *cmd)
@@ -228,6 +247,9 @@ void DFRobot_BT401::sendCMD(const char *cmd)
   data += "\r\n";
   uint8_t length = data.length();
   uint8_t at[20];
+   while(_s->available()) {
+	    _s->read();
+	 }
   for(uint8_t i=0;i<length;i++)
     at[i] = data[i];
   _s->write(at,length);
@@ -240,6 +262,7 @@ String DFRobot_BT401::readAck(uint8_t len)
   long long curr = millis();
   if(len == 0){
     while(1) {
+      //Serial.println(1);
       if(_s->available()) {
         str[offset]= _s->read();
         left--;
@@ -253,18 +276,22 @@ String DFRobot_BT401::readAck(uint8_t len)
 	}
   } else {
     while(left) {
+		DBG(left);
       if(_s->available()) {
          str[offset]= _s->read();
         left--;
+        DBG(str[offset]);
         offset++;
       }
       if(millis() - curr > 1000) {
         return "error";
-        break;
+        
       }
   }
-  }
   str[len]=0;
+  }
+  DBG(str);
+  //Serial.println(str);
   return str;
 }
 
