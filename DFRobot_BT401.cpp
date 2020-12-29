@@ -5,7 +5,7 @@
  * @licence     The MIT License (MIT)
  * @author [Eddard](eddard.liu@dfrobot.com)
  * @version  V1.0
- * @date  2020-03-19
+ * @date  2020-12-29
  * @get from https://www.dfrobot.com
  * @url https://github.com/cdjq/DFRobot_BT401
  */
@@ -113,7 +113,7 @@ bool DFRobot_BT401::last()
 }
 
 //Play the N-th file of the device 
-bool DFRobot_BT401::playSpecFile(uint16_t number)
+bool DFRobot_BT401::playFileNum(uint16_t number)
 {
   char data[5];
   itoa(number, data, 10);
@@ -227,11 +227,11 @@ void DFRobot_BT401::sendCMD(const char *cmd, const char *payload)
     DBG("\r\n");
   uint8_t at[20];
   
+  DBG("\r\n");
+  while(_s->available()) {
     DBG("\r\n");
-   while(_s->available()) {
-    DBG("\r\n");
-	    _s->read();
-	 }
+    _s->read();
+  }
     DBG(data);
   for(uint8_t i=0;i<length;i++)
     at[i] = data[i];
@@ -247,9 +247,9 @@ void DFRobot_BT401::sendCMD(const char *cmd)
   data += "\r\n";
   uint8_t length = data.length();
   uint8_t at[20];
-   while(_s->available()) {
-	    _s->read();
-	 }
+  while(_s->available()) {
+        _s->read();
+  }
   for(uint8_t i=0;i<length;i++)
     at[i] = data[i];
   _s->write(at,length);
@@ -262,7 +262,6 @@ String DFRobot_BT401::readAck(uint8_t len)
   long long curr = millis();
   if(len == 0){
     while(1) {
-      //Serial.println(1);
       if(_s->available()) {
         str[offset]= _s->read();
         left--;
@@ -273,10 +272,10 @@ String DFRobot_BT401::readAck(uint8_t len)
         return "error";
         break;
       }
-	}
+    }
   } else {
     while(left) {
-		DBG(left);
+      DBG(left);
       if(_s->available()) {
          str[offset]= _s->read();
         left--;
@@ -291,7 +290,7 @@ String DFRobot_BT401::readAck(uint8_t len)
   str[len]=0;
   }
   DBG(str);
-  //Serial.println(str);
+  delay(1);
   return str;
 }
 

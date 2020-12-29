@@ -1,16 +1,28 @@
+/*!
+ * @file playMusic.ino.ino
+ * @brief 播放TF卡内音乐
+ * @n Experiment Phenomenon：播放音乐并进行相应控制
+ * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+ * @licence     The MIT License (MIT)
+ * @author [Eddard](Eddard.liu@dfrobot.com)
+ * @version  V1.0
+ * @date  2020-12-29
+ * @get from https://www.dfrobot.com
+ * @url https://github.com/cdjq/DFRobot_ID809
+*/
 
 #include <DFRobot_BT401.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial Serial1(2, 3);
+SoftwareSerial btSerial(2, 3);  //RX TX
 
 DFRobot_BT401 bt;
 
 void setup(){
-  Serial1.begin(115200);
+  btSerial.begin(115200);
   /*Delay 2s for the BT401 to start*/
   delay(2000);
-  while(!bt.begin(Serial1)){
+  while(!bt.begin(btSerial)){
     Serial.println("Init failed, please check wire connection!");
     delay(1000);
   }
@@ -33,7 +45,7 @@ void loop(){
   bt.last();
   delay(3000);
   //Play song in the first file
-  bt.playSpecFile(1);
+  bt.playFileNum(1);
   while(1);
   /*Delete the currently playing file*/
   //bt.delCurFile();

@@ -7,7 +7,7 @@
  * @licence     The MIT License (MIT)
  * @author [Eddard](eddard.liu@dfrobot.com)
  * @version  V1.0
- * @date  2020-03-19
+ * @date  2020-12-29
  * @get from https://www.dfrobot.com
  * @url https://github.com/cdjq/DFRobot_BT401
  */
@@ -83,34 +83,97 @@ public:
 public:
   DFRobot_BT401();
   bool begin(Stream &s);
-  //Set volume 
+  /**
+   * @brief Set volume
+   * @param volume(0-30)
+   * @return true or false
+   */
   bool setVOl(uint8_t vol);
-  //Set working mode
+  
+  /**
+   * @brief Set working mode
+   * @param eFunction_t
+   * @return true or false
+   */
   bool switchFunction(eFunction_t function);
-  //Set play mode 
+
+  /**
+   * @brief Set play mode 
+   * @param ePlayMode_t
+   * @return true or false
+   */
   bool setPlayMode(ePlayMode_t mode);
-  //Play control  Only valid for playback by TF card and U-disk
+
+  /**
+   * @brief Play control  Only valid for playback by TF card and U-disk
+   * @param ePlayControl_t
+   * @return true or false
+   */
   bool playControl(ePlayControl_t cmd);
-  //Next 
+  
+  /**
+   * @brief Next
+   * @return true or false
+   */
   bool next();
-  //Last 
+  
+  /**
+   * @brief Last 
+   * @return true or false
+   */
   bool last();
-  //Play the N-th file, play song of the specified number 
-  bool playSpecFile(uint16_t number);
-  //Play song of the specified path 
+
+  /**
+   * @brief Play the N-th file, play song of the specified number 
+   * @param specified number
+   * @return true or false
+   */
+  bool playFileNum(uint16_t number);
+  
+  /**
+   * @brief Play song of the specified path
+   * @param specified path
+   * @return true or false
+   */
   bool playSpecFile(const char* path);
-  //Delete the currently playing file 
+  
+  /**
+   * @brief Delete the currently playing file 
+   * @return true or false
+   */
   bool delCurFile();
-  //Dial a phone number 
+  
+  /**
+   * @brief Dial a phone number 
+   * @param phone number
+   * @return true or false
+   */
   bool callOut(const char* phoneNumber);
-  //Call control 
+  
+  /**
+   * @brief Call control 
+   * @param eControltalk_t
+   * @return true or false
+   */
   bool controltalk(eControltalk_t cmd);
-  //Reset 
+
+  /**
+   * @brief Reset
+   * @return true or false
+   */
   bool reset();
-  //Obtain bluetooth status 
+
+  /**
+   * @brief Obtain bluetooth status 
+   * @return eBtStatus
+   */
   eBtStatus getBtStatus();
-  //Obtain calling phone number 
-  String  getTelNumber();
+  
+  /**
+   * @brief Obtain calling phone number 
+   * @return phone number
+   */
+  String getTelNumber();
 protected:
  /**
   * @brief Send data 
