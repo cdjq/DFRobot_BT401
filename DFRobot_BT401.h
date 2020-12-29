@@ -70,13 +70,14 @@ public:
     eHangUp,          //挂断电话
     eAnswer        //接听电话
   }eControltalk_t;
+  
   //蓝牙状态
   typedef enum{
-   eStandby,
-   eBTIdle,
-   ePlaying,
-   eCalling,
-   eOnphone,
+   eStandby,  //等待配对
+   eBTIdle,   //空闲
+   ePlaying,  //正在播放音乐
+   eCalling,  //有电话打入
+   eOnphone,  //通话中
    eError,
   }eBtStatus;
 public:
