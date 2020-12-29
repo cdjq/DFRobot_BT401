@@ -89,7 +89,7 @@ public:
   bool switchFunction(eFunction_t function);
   //播放模式
   bool setPlayMode(ePlayMode_t mode);
-  //播放控制  仅对TF卡和U盘播放有效  AA
+  //播放控制  仅对TF卡和U盘播放有效
   bool playControl(ePlayControl_t cmd);
   //下一曲
   bool next();
