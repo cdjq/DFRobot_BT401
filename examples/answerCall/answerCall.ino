@@ -7,10 +7,10 @@ DFRobot_BT401 bt;
 
 void setup(){
   Serial1.begin(115200);
-  /*延时2S等待BT401启动完成*/
+  /*Delay 2s for the BT401 to start*/
   delay(2000);
   while(!bt.begin(Serial1)){
-    Serial.println("初始化失败，请检查接线！");
+    Serial.println("Init failed, please check wire connection!");
     delay(1000);
   }
   bt.setVOl(30);
@@ -19,7 +19,7 @@ void setup(){
 }
 
 void loop(){
-  //播放
+  //Play
     if(bt.getBtStatus() == bt.eCalling){
       Serial.println(bt.getTelNumber());
       delay(50);
