@@ -8,10 +8,10 @@ DFRobot_BT401 bt;
 
 void setup(){
   Serial1.begin(115200);
-  /*延时2S等待BT401启动完成*/
+  /*Delay 2s for the BT401 to start*/
   delay(2000);
   while(!bt.begin(Serial1)){
-    Serial.println("初始化失败，请检查接线！");
+    Serial.println("Init failed, please check wire connection!");
     delay(1000);
   }
   bt.setVOl(30);
@@ -20,21 +20,21 @@ void setup(){
 }
 
 void loop(){
-  //播放
+  //Play
   bt.playControl(bt.ePlay);
   delay(3000);
-  //暂停
+  //Pause 
   bt.playControl(bt.ePause);
   delay(3000);
-  //下一曲
+  //Next 
   bt.next();
   delay(3000);
-  //上一曲
+  //Last 
   bt.last();
   delay(3000);
-  //播放第一个文件
+  //Play song in the first file
   bt.playSpecFile(1);
   while(1);
-  /*删除正在播放的文件*/
+  /*Delete the currently playing file*/
   //bt.delCurFile();
 }
