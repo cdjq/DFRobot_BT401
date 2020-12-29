@@ -29,7 +29,7 @@ bool DFRobot_BT401::begin(Stream &s){
   return true;
 }
 
-//设置音量
+//Set volume 
 bool DFRobot_BT401::setVOl(uint8_t vol)
 {
   char data[2];
@@ -51,7 +51,7 @@ bool DFRobot_BT401::setVOl(uint8_t vol)
   }
 }
 
-//设置工作模式
+//Set working mode 
 bool DFRobot_BT401::switchFunction(eFunction_t function)
 {
   char data[1];
@@ -64,7 +64,7 @@ bool DFRobot_BT401::switchFunction(eFunction_t function)
   }
 }
 
-//播放模式
+//Playback mode 
 bool DFRobot_BT401::setPlayMode(ePlayMode_t mode)
 {
   char data[1];
@@ -77,7 +77,7 @@ bool DFRobot_BT401::setPlayMode(ePlayMode_t mode)
   }
 }
 
-//播放控制  仅对TF卡和U盘播放有效  AA
+//Play control   Only valid for playback by TF card and U-disk   AA
 bool DFRobot_BT401::playControl(ePlayControl_t cmd)
 {
   char data[1];
@@ -90,7 +90,7 @@ bool DFRobot_BT401::playControl(ePlayControl_t cmd)
   }
 }
 
-//下一曲
+//Next 
 bool DFRobot_BT401::next()
 {
   sendCMD("CD");
@@ -101,7 +101,7 @@ bool DFRobot_BT401::next()
   }
 }
 
-//上一曲
+//Last 
 bool DFRobot_BT401::last()
 {
   sendCMD("CC");
@@ -112,7 +112,7 @@ bool DFRobot_BT401::last()
   }
 }
 
-//指定设备的第N个文件进行播放
+//Play the N-th file of the device 
 bool DFRobot_BT401::playSpecFile(uint16_t number)
 {
   char data[5];
@@ -125,7 +125,7 @@ bool DFRobot_BT401::playSpecFile(uint16_t number)
   }
 }
 
-//指定文件夹循环播放
+//Repeat all songs in the specified file folder 
 bool DFRobot_BT401::playSpecFile(const char* path)
 {
   sendCMD("AF", path);
@@ -136,7 +136,7 @@ bool DFRobot_BT401::playSpecFile(const char* path)
   }
 }
 
-//删除当前播放的文件
+//Delete the currently playing file 
 bool DFRobot_BT401::delCurFile()
 {
   sendCMD("AA08");
@@ -147,7 +147,7 @@ bool DFRobot_BT401::delCurFile()
   }
 }
 
-//呼叫电话号码
+//Dail a phone number 
 bool DFRobot_BT401::callOut(const char *phoneNumber)
 {
   sendCMD("BT", phoneNumber);
@@ -158,7 +158,7 @@ bool DFRobot_BT401::callOut(const char *phoneNumber)
   }
 }
 
-//通话控制
+//Calling control 
 bool DFRobot_BT401::controltalk(eControltalk_t cmd)
 {
   char data[1];
@@ -200,7 +200,7 @@ String DFRobot_BT401::getTelNumber(){
   return phone;
 
 }
-//复位
+//Reset 
 bool DFRobot_BT401::reset()
 {
   sendCMD("CZ");
