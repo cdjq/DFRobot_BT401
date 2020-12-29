@@ -33,83 +33,83 @@
 class DFRobot_BT401{
 public:
   
-  //工作模式
+  //Working Mode 
   typedef enum{
-    eBluetooth = 1,  //蓝牙模式
-    eUDisk,          //U盘模式
-    eTFCard,         //TF卡模式
-    eIdle = 8            //空闲模式
+    eBluetooth = 1,  //Bluetooth 
+    eUDisk,          //U-disk
+    eTFCard,         //TF card
+    eIdle = 8            //idle 
   }eFunction_t;
   
-  //播放模式
+  //Playback Mode 
   typedef enum{
-    eRepeatAll = 0,  //全部循环
-    eDeviceCycle,      //单设备循环
-    eSingleCycle,    //单曲循环
-    eDeviceRandom,    //单设备随机播放
-    eFileCycle      //文件夹循环
+    eRepeatAll = 0,  //Repeat all 
+    eDeviceCycle,      //Repeat all songs in one device 
+    eSingleCycle,    //Repeat one song 
+    eDeviceRandom,    //Play random in one device 
+    eFileCycle      //Repeat all songs in file folder 
   }ePlayMode_t;
   
-  //播放控制
+  //Playback control 
   typedef enum{
-    eStop = 0,       //停止
-    ePlay,           //播放
-    ePause,          //暂停
-    ePPSwitch,       //播放&暂停切换
-    eFF,             //快进
-    eFR,             //快退
-    eNextFile,    //播放下一个文件夹
-    eLastFile     //播放上一个文件夹
+    eStop = 0,       //stop 
+    ePlay,           //play 
+    ePause,          //pause 
+    ePPSwitch,       //Play & pause switch 
+    eFF,             //fast forward
+    eFR,             //fast backword 
+    eNextFile,    //Play songs in next file folder 
+    eLastFile     //Play songs in last file folder 
   }ePlayControl_t;
   
-  //通话控制
+  //Calling control 
   typedef enum{
-    eCallBack = 0,       //回拨上一个电话
-    eDisconnectBLE,              //断开蓝牙连接
-    eRejectCall,           //拒接
-    eHangUp,          //挂断电话
-    eAnswer        //接听电话
+    eCallBack = 0,       //Call back the last phone number
+    eDisconnectBLE,              //Disconnect Bluetooth 
+    eRejectCall,           //Refuse to answer 
+    eHangUp,          //Hang up 
+    eAnswer        //Answer 
   }eControltalk_t;
   
-  //蓝牙状态
+  //Bluetooth Status 
   typedef enum{
-   eStandby,  //等待配对
-   eBTIdle,   //空闲
-   ePlaying,  //正在播放音乐
-   eCalling,  //有电话打入
-   eOnphone,  //通话中
+   eStandby,  //Wait for pairing 
+   eBTIdle,   //idle 
+   ePlaying,  //Playing music 
+   eCalling,  //Phone call coming  
+   eOnphone,  //On the phone 
    eError,
   }eBtStatus;
 public:
   DFRobot_BT401();
   bool begin(Stream &s);
-  //设置音量
+  //Set volume 
   bool setVOl(uint8_t vol);
-  //设置工作模式
+  //Set working mode
   bool switchFunction(eFunction_t function);
-  //播放模式
+  //Set play mode 
   bool setPlayMode(ePlayMode_t mode);
-  //播放控制  仅对TF卡和U盘播放有效
+  //Play control  Only valid for playback by TF card and U-disk
   bool playControl(ePlayControl_t cmd);
-  //下一曲
+  //Next 
   bool next();
-  //上一曲
+  //Last 
   bool last();
-  //指定设备的第N个文件进行播放  指定序号播放
+  //Play the N-th file, play song of the specified number 
   bool playSpecFile(uint16_t number);
-  //指定路径播放
+  //Play song of the specified path 
   bool playSpecFile(const char* path);
-  //删除当前播放的文件
+  //Delete the currently playing file 
   bool delCurFile();
-  //呼叫电话号码
+  //Dial a phone number 
   bool callOut(const char* phoneNumber);
-  //通话控制
+  //Call control 
   bool controltalk(eControltalk_t cmd);
-  //复位
+  //Reset 
   bool reset();
-  //得到蓝牙状态
+  //Obtain bluetooth status 
   eBtStatus getBtStatus();
-  //获取通话号码
+  //Obtain calling phone number 
   String  getTelNumber();
 protected:
  /**
