@@ -11,8 +11,8 @@ This Bluetooth module features Bluetooth/U-disk/TF-card playback, and Bluetooth 
 * [Credits](#credits)
 
 ## Summary
-1.play music<br>
-2.answer calls
+1. Play music<br>
+2. Answer calls
 
 
 ## Installation
