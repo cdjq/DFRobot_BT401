@@ -1,7 +1,7 @@
 /*!
  * @file answerCall.ino.ino
- * @brief 获取来电信息
- * @n Experiment Phenomenon：来电时打印电话号码并接听
+ * @brief Get incoming call information 
+ * @n Experiment Phenomenon：Print phone number and answer the phone when a call comes 
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
  * @author [Eddard](Eddard.liu@dfrobot.com)
@@ -32,7 +32,7 @@ void setup(){
 }
 
 void loop(){
-    //如果有电话拨入，则打印来电号码并接听
+    //If a call comes, print phone number and answer it 
     if(bt.getBtStatus() == bt.eCalling){
       Serial.println(bt.getTelNumber());
       delay(1000);
@@ -41,9 +41,9 @@ void loop(){
       //Refuse to answer
       //bt.controltalk(bt.eRejectCall);
     }
-    //如果正处于通话中，则打印来电号码
+    //If you are on the phone, print the incoming phone number 
     if(bt.getBtStatus() == bt.eOnphone){
-      Serial.print("通话中:");
+      Serial.print("On the phone:");
       Serial.println(bt.getTelNumber());
       delay(1000);
       //Hang Up
