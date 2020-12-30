@@ -1,7 +1,7 @@
 /*!
  * @file playMusic.ino.ino
- * @brief 播放TF卡内音乐
- * @n Experiment Phenomenon：播放音乐并进行相应控制
+ * @brief Play song in TF card 
+ * @n Experiment Phenomenon：play music and do the related actions 
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
  * @author [Eddard](Eddard.liu@dfrobot.com)
